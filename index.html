@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Мои английские слова</title>
+<style>
+:root{--bg:#EEF2FA;--surface:#fff;--ink:#14213D;--muted:#5B6785;--line:#D5DDEE;--accent:#2F5BFF;--accent-ink:#fff;--card:#FFC233;--card-ink:#14213D;--ok:#127A4B;--bad:#C0322B;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);color-scheme:light}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0E1526;--surface:#17203A;--ink:#EAF0FF;--muted:#9AA7C7;--line:#2A3558;--accent:#7C9BFF;--accent-ink:#0E1526;--card:#FFC233;--card-ink:#14213D;--ok:#58D69B;--bad:#FF8A82;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0E1526;--surface:#17203A;--ink:#EAF0FF;--muted:#9AA7C7;--line:#2A3558;--accent:#7C9BFF;--accent-ink:#0E1526;--ok:#58D69B;--bad:#FF8A82;color-scheme:dark}
+*{box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+main{max-width:560px;margin:0 auto;padding:20px 16px 40px}
+h1{font-size:26px;line-height:1.15;margin:4px 0 16px;font-weight:800;letter-spacing:-.02em}
+nav{display:flex;gap:6px;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:4px;margin-bottom:18px}
+nav button{flex:1;border:0;background:none;color:var(--muted);font:inherit;font-weight:600;padding:10px 4px;border-radius:10px;cursor:pointer}
+nav button[aria-selected="true"]{background:var(--accent);color:var(--accent-ink)}
+button:focus-visible,input:focus-visible,textarea:focus-visible,summary:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.panel{display:none}.panel.on{display:block}
+.row{display:flex;gap:8px;flex-wrap:wrap}
+input,textarea,select{font:inherit;color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:11px 12px;width:100%}
+.row input{flex:1 1 140px;width:auto}
+.btn{border:0;border-radius:10px;padding:11px 16px;font:inherit;font-weight:700;background:var(--accent);color:var(--accent-ink);cursor:pointer}
+.btn.ghost{background:var(--surface);color:var(--ink);border:1px solid var(--line)}
+details{margin:14px 0;color:var(--muted)}
+summary{cursor:pointer;font-weight:600}
+textarea{min-height:100px;margin:10px 0}
+ul{list-style:none;margin:16px 0 0;padding:0}
+li{display:flex;align-items:center;gap:10px;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:10px 12px;margin-bottom:8px}
+li .w{flex:1;min-width:0}
+li b{display:block;overflow-wrap:anywhere}
+li span{color:var(--muted);overflow-wrap:anywhere}
+li small{color:var(--muted);white-space:nowrap}
+li button{border:0;background:none;color:var(--muted);font-size:22px;line-height:1;padding:6px;cursor:pointer;border-radius:8px}
+.empty{color:var(--muted);text-align:center;padding:28px 8px}
+.flash{display:block;width:100%;min-height:210px;border:0;border-radius:22px;background:var(--card);color:var(--card-ink);font:inherit;font-size:34px;font-weight:800;letter-spacing:-.01em;padding:24px;cursor:pointer;overflow-wrap:anywhere;margin:6px 0 14px}
+.flash small{display:block;font-size:14px;font-weight:600;opacity:.7;margin-top:10px}
+.meta{color:var(--muted);font-size:14px;margin:0 0 4px}
+.fb{min-height:28px;font-weight:700;margin:10px 0}
+.fb.ok{color:var(--ok)}.fb.bad{color:var(--bad)}
+.q{font-size:32px;font-weight:800;margin:6px 0 12px;overflow-wrap:anywhere}
+.actions{display:flex;gap:8px}
+#speak .actions{flex-wrap:wrap}.actions .btn{flex:1}
+#tools{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:12px 0 0}
+.btn.danger{background:var(--bad);color:var(--bg)}
+.btn:disabled{opacity:.5;cursor:default}
+li input[type=checkbox]{width:22px;height:22px;flex:none;padding:0;accent-color:var(--accent)}
+.auto{display:flex;gap:8px;align-items:center;color:var(--muted);margin:-6px 0 14px;cursor:pointer}
+.auto input{width:20px;height:20px;padding:0;accent-color:var(--accent)}
+#photoBox{margin:12px 0 0}
+#photoBox .btn{display:inline-block}
+.pst{color:var(--muted);margin:8px 0}
+#cand{margin-top:10px}
+#cand li{cursor:pointer}
+#cand input{width:22px;height:22px;flex:none;accent-color:var(--accent);padding:0}
+@media (prefers-reduced-motion:no-preference){.flash{transition:transform .12s}.flash:active{transform:scale(.98)}}
+</style>
+</head>
+<body>
+<main>
+<h1>Мои английские слова</h1>
+<nav role="tablist">
+<button role="tab" data-t="list" aria-selected="true">Слова</button>
+<button role="tab" data-t="cards" aria-selected="false">Карточки</button>
+<button role="tab" data-t="quiz" aria-selected="false">Тест</button>
+<button role="tab" data-t="speak" aria-selected="false">Говорение</button>
+</nav>
+<label class="auto"><input type="checkbox" id="auto"> 🔊 Озвучивать автоматически</label>
+
+<section class="panel on" id="list">
+<div class="row">
+<input id="en" placeholder="Слово или фраза (по-английски или по-русски)" autocapitalize="none" autocomplete="off" aria-label="Слово или фраза">
+<input id="ru" hidden placeholder="Впишите перевод сами" autocomplete="off" aria-label="Перевод">
+<button class="btn" id="add">Добавить</button>
+</div>
+<p class="pst" id="addst" aria-live="polite"></p>
+<div id="photoBox" hidden>
+<label class="btn ghost" for="photo">📷 Добавить из фото</label>
+<input type="file" id="photo" accept="image/*" hidden>
+<div class="pst" id="pst" aria-live="polite"></div>
+<div id="candWrap" hidden>
+<ul id="cand"></ul>
+<div class="actions" style="margin-top:10px"><button class="btn" id="addCand">Добавить выбранные</button><button class="btn ghost" id="clearCand">Отмена</button></div>
+</div>
+</div>
+<details>
+<summary>Добавить сразу много слов</summary>
+<textarea id="bulk" placeholder="apple - яблоко&#10;see you later&#10;добро пожаловать" aria-label="Список слов"></textarea>
+<button class="btn ghost" id="addBulk">Добавить список</button>
+</details>
+<p class="meta" id="count"></p>
+<div id="tools"></div>
+<ul id="items"></ul>
+</section>
+
+<section class="panel" id="cards">
+<p class="meta" id="cprog"></p>
+<button class="flash" id="flash" aria-live="polite"></button>
+<div class="actions" style="margin-bottom:8px"><button class="btn ghost" id="cspk">🔊 Произнести слово</button></div>
+<div class="actions"><button class="btn ghost" id="again">Ещё раз</button><button class="btn" id="know">Знаю</button></div>
+</section>
+
+<section class="panel" id="quiz">
+<select id="dir" aria-label="Направление" style="margin-bottom:10px"><option value="en">Английский → русский</option><option value="ru">Русский → английский</option><option value="mix">Вперемешку</option></select>
+<p class="meta" id="qscore"></p>
+<div class="q" id="qword"></div>
+<button class="btn ghost" id="qspk" style="margin-bottom:10px">🔊 Послушать слово</button>
+<input id="qans" placeholder="Введите перевод" autocomplete="off" aria-label="Перевод">
+<div class="fb" id="fb" aria-live="polite"></div>
+<div class="actions"><button class="btn" id="check">Проверить</button><button class="btn ghost" id="next">Дальше</button></div>
+</section>
+<section class="panel" id="speak">
+<p class="meta" id="sscore"></p>
+<div class="q" id="sword"></div>
+<p class="meta" id="shint"></p>
+<div class="actions"><button class="btn" id="mic">🎤 Сказать по-английски</button></div>
+<div class="actions" style="margin-top:8px"><button class="btn ghost" id="hintb">Подсказка</button><button class="btn ghost" id="snext">Дальше</button></div>
+<div class="fb" id="sfb" aria-live="polite"></div>
+</section>
+</main>
+
+<script>
+var KEY="eng-words-v1",words=[],$=function(i){return document.getElementById(i)};
+function load(){try{var s=localStorage.getItem(KEY);words=s?JSON.parse(s):[];if(!Array.isArray(words))words=[]}catch(e){words=[]}}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(words))}catch(e){}}
+function norm(s){return s.trim().toLowerCase().replace(/ё/g,"е")}
+function add(en,ru){en=en.trim();ru=ru.trim();if(!en||!ru)return false;
+if(words.some(function(w){return norm(w.en)===norm(en)}))return false;
+words.push({en:en,ru:ru,ok:0,miss:0});return true}
+
+function renderList(){
+var ul=$("items");ul.textContent="";renderTools();
+$("count").textContent=words.length?("Слов: "+words.length):"";
+if(!words.length){var p=document.createElement("p");p.className="empty";p.textContent="Пока пусто. Добавьте первое слово выше.";ul.appendChild(p);return}
+words.forEach(function(w,i){
+var li=document.createElement("li"),d=document.createElement("div");d.className="w";
+var b=document.createElement("b");b.textContent=w.en;var s=document.createElement("span");s.textContent=w.ru;
+d.appendChild(b);d.appendChild(s);
+var sm=document.createElement("small");sm.textContent="✓"+w.ok+" ✗"+w.miss;
+var x=document.createElement("button");x.textContent="×";x.setAttribute("aria-label","Удалить "+w.en);
+x.onclick=function(){words.splice(i,1);save();renderList()};var cb=null;if(mode==='select'){cb=document.createElement('input');cb.type='checkbox';cb.checked=!!sel[i];cb.setAttribute('aria-label','Выбрать '+w.en);cb.onchange=function(){sel[i]=cb.checked;renderTools()}}
+if(cb)li.appendChild(cb);li.appendChild(d);li.appendChild(sm);if(!cb)li.appendChild(spk(w.en));if(!cb)li.appendChild(x);ul.appendChild(li)})}
+
+function speak(t){try{if(!window.speechSynthesis)return;speechSynthesis.cancel();var u=new SpeechSynthesisUtterance(t);u.lang="en-US";u.rate=.9;speechSynthesis.speak(u)}catch(e){}}
+function spk(t){var b=document.createElement("button");b.textContent="🔊";b.setAttribute("aria-label","Произнести "+t);b.onclick=function(){speak(t)};return b}
+function autoOn(){return $("auto").checked}
+var mode='idle',sel={};
+function mk(t,c,f){var b=document.createElement('button');b.className='btn '+c;b.textContent=t;b.onclick=f;return b}
+function selCount(){return Object.keys(sel).filter(function(k){return sel[k]}).length}
+function renderTools(){
+var t=$('tools');t.textContent='';
+if(!words.length){mode='idle';sel={};return}
+if(mode==='idle'){
+t.appendChild(mk('Выбрать','ghost',function(){mode='select';sel={};renderList()}));
+t.appendChild(mk('Удалить все','ghost',function(){mode='confirmAll';renderList()}))
+}else if(mode==='confirmAll'){
+var p=document.createElement('span');p.className='pst';p.textContent='Удалить все слова ('+words.length+')?';
+t.appendChild(p);
+t.appendChild(mk('Да, удалить','danger',function(){words=[];mode='idle';save();renderList()}));
+t.appendChild(mk('Отмена','ghost',function(){mode='idle';renderList()}))
+}else{
+var n=selCount(),del=mk('Удалить выбранные ('+n+')','danger',function(){words=words.filter(function(w,i){return !sel[i]});mode='idle';sel={};save();renderList()});
+del.disabled=!n;t.appendChild(del);
+t.appendChild(mk(n===words.length?'Снять выбор':'Выбрать все','ghost',function(){var all=n!==words.length;sel={};if(all)words.forEach(function(w,i){sel[i]=true});renderList()}));
+t.appendChild(mk('Отмена','ghost',function(){mode='idle';sel={};renderList()}))
+}}
+$("add").onclick=function(){
+if(add($("en").value,$("ru").value)){$("en").value="";$("ru").value="";save();renderList();$("en").focus()}
+else{$("en").focus()}};
+$("ru").addEventListener("keydown",function(e){if(e.key==="Enter")$("add").click()});
+$("addBulk").onclick=function(){
+$("bulk").value.split("\n").forEach(function(l){
+var m=l.split(/\s+[-–—]\s+|\t|\s*=\s*/);
+if(m.length>=2)add(m[0],m.slice(1).join(" - "))});
+$("bulk").value="";save();renderList()};
+
+/* auto translate */
+var busy=false;
+function isRu(s){return /[а-яё]/i.test(s)}
+async function jget(u){var c=new AbortController(),tm=setTimeout(function(){c.abort()},8000);try{var r=await fetch(u,{signal:c.signal});if(!r.ok)throw 0;return await r.json()}finally{clearTimeout(tm)}}
+async function tr(text){
+var ru=isRu(text),a=ru?"ru":"en",b=ru?"en":"ru",q=encodeURIComponent(text);
+var good=function(t){return t&&typeof t==="string"&&norm(t)!==norm(text)&&!/MYMEMORY WARNING/i.test(t)};
+var tries=[
+async function(){var j=await jget("https://api.mymemory.translated.net/get?q="+q+"&langpair="+a+"%7C"+b);if(String(j.responseStatus)!=="200")return null;return j.responseData.translatedText},
+async function(){var j=await jget("https://translate.googleapis.com/translate_a/single?client=gtx&sl="+a+"&tl="+b+"&dt=t&q="+q);return j[0].map(function(x){return x[0]}).join("")},
+async function(){var j=await jget("https://lingva.ml/api/v1/"+a+"/"+b+"/"+q);return j.translation}];
+for(var n=0;n<tries.length;n++){try{var t=await tries[n]();if(good(t))return t.trim()}catch(e){}}
+if(sample){try{
+var o=await sample("Переведи "+(ru?"с русского на английский":"с английского на русский")+' слово или фразу: "'+text+'". Ответь ТОЛЬКО переводом (одним-тремя самыми частыми вариантами через запятую), без пояснений.',{modelTier:"quick"});
+var s=(o.text||"").trim().replace(/^["«]|["»]$/g,"");if(s)return s}catch(e){}}
+return null}
+async function addAuto(){
+if(busy)return;
+var a=$("en").value.trim(),b=$("ru").value.trim(),st=$("addst");
+if(!a&&b){a=b;b=""}
+if(!a)return;
+if(b){
+var sw=isRu(a)&&!isRu(b),e=sw?b:a,r=sw?a:b;
+if(add(e,r)){$("en").value="";$("ru").value="";$("ru").hidden=true;st.textContent="";save();renderList();$("en").focus()}else st.textContent="Это слово уже есть в списке.";
+return}
+busy=true;$("add").disabled=true;st.textContent="Ищу перевод…";
+var t=await tr(a);busy=false;$("add").disabled=false;
+if(!t){st.textContent="Не получилось найти перевод. Впишите его сами в появившемся поле и нажмите «Добавить».";$("ru").hidden=false;$("ru").focus();return}
+var ok=isRu(a)?add(t,a):add(a,t);
+if(ok){st.textContent=a+" → "+t;$("en").value="";$("ru").value="";$("ru").hidden=true;save();renderList();$("en").focus()}
+else st.textContent="Это слово уже есть в списке."}
+$("add").onclick=addAuto;
+$("en").addEventListener("keydown",function(e){if(e.key==="Enter")addAuto()});
+$("addBulk").onclick=async function(){
+if(busy)return;busy=true;var ls=$("bulk").value.split("\n"),n=0,miss=[],st=$("addst");
+$("addBulk").disabled=true;
+for(var i=0;i<ls.length;i++){var l=ls[i].trim();if(!l)continue;
+st.textContent="Добавляю "+(i+1)+" из "+ls.length+"…";
+var m=l.split(/\s+[-–—]\s+|\t|\s*=\s*/),x,y;
+if(m.length>=2){x=m[0];y=m.slice(1).join(" - ")}
+else{x=l;y=await tr(l);if(!y){miss.push(l);continue}}
+if(isRu(x)&&!isRu(y)){var z=x;x=y;y=z}
+if(add(x,y))n++}
+busy=false;$("addBulk").disabled=false;$("bulk").value=miss.join("\n");
+st.textContent="Добавлено: "+n+(miss.length?". Не нашёл перевода: "+miss.length+" (они остались в поле)":"");
+save();renderList()};
+
+/* photo import */
+var sample=null,found=[];
+(async function(){try{
+if(typeof claude==="undefined")return;
+sample=await claude.use("sample");if(!sample)return;
+var l=await sample.limits();
+if(l&&l.images){$("photo").accept=l.images.mediaTypes.join(",");$("photoBox").hidden=false}
+}catch(e){}})();
+var PROMPT='На фото есть текст на английском (страница учебника, список слов, вывеска, меню и т.п.). Выбери отдельные английские слова и устойчивые выражения, полезные для изучения (без имён и совсем простых слов вроде the, is, and). Для каждого дай краткий перевод на русский; если на фото уже есть переводы, используй их. Ответь ТОЛЬКО JSON-массивом вида [{"en":"apple","ru":"яблоко"}], не больше 30 элементов. Если английского текста нет, верни [].';
+function errText(c){return c==="not_granted"?"Доступ к Claude не разрешён. Разрешите его, чтобы читать фото.":c==="rate_limited"?"Слишком много запросов. Попробуйте чуть позже.":c==="image_rejected"?"Не получилось прочитать это фото. Попробуйте другое.":"Не получилось обработать фото. Попробуйте ещё раз."}
+function showCand(){
+var ul=$("cand");ul.textContent="";
+found.forEach(function(w,i){
+var li=document.createElement("li"),cb=document.createElement("input");cb.type="checkbox";cb.checked=true;cb.id="c"+i;cb.setAttribute("aria-label",w.en);
+var d=document.createElement("label");d.className="w";d.htmlFor=cb.id;
+var b=document.createElement("b");b.textContent=w.en;var s=document.createElement("span");s.textContent=w.ru;
+d.appendChild(b);d.appendChild(s);li.appendChild(cb);li.appendChild(d);ul.appendChild(li)});
+$("candWrap").hidden=!found.length}
+$("photo").onchange=async function(){
+var f=this.files&&this.files[0];this.value="";if(!f||!sample)return;
+$("candWrap").hidden=true;$("pst").textContent="Читаю фото…";
+try{
+var r=await sample.json(PROMPT,{images:[f]});
+found=(Array.isArray(r)?r:[]).filter(function(x){return x&&typeof x.en==="string"&&typeof x.ru==="string"&&x.en.trim()&&x.ru.trim()&&!words.some(function(w){return norm(w.en)===norm(x.en)})});
+$("pst").textContent=found.length?"Нашлось слов: "+found.length+". Уберите галочки с лишних.":"Новых слов на фото не нашлось.";
+showCand()
+}catch(e){$("pst").textContent=errText(e&&e.code)}};
+$("addCand").onclick=function(){
+found.forEach(function(w,i){var c=$("c"+i);if(c&&c.checked)add(w.en,w.ru)});
+found=[];showCand();$("pst").textContent="";save();renderList();document.querySelector('nav button[data-t="quiz"]').click()};
+$("clearCand").onclick=function(){found=[];showCand();$("pst").textContent=""};
+
+/* cards */
+var queue=[],total=0,flipped=false;
+function startCards(){queue=words.map(function(_,i){return i}).sort(function(){return Math.random()-.5});total=queue.length;flipped=false;showCard()}
+function showCard(){
+var f=$("flash"),has=queue.length>0;
+$("again").disabled=$("know").disabled=!has;
+if(!words.length){f.textContent="Сначала добавьте слова";$("cprog").textContent="";return}
+if(!has){f.textContent="Круг пройден 🎉";var s=document.createElement("small");s.textContent="Нажмите, чтобы пройти заново";f.appendChild(s);$("cprog").textContent="";flipped="done";return}
+var w=words[queue[0]];$("cprog").textContent="Осталось: "+queue.length+" из "+total;
+f.textContent=flipped===true?w.ru:w.en;if(flipped!==true&&autoOn())speak(w.en);
+var s2=document.createElement("small");s2.textContent=flipped===true?"перевод":"нажмите, чтобы перевернуть";f.appendChild(s2)}
+$("flash").onclick=function(){if(flipped==="done"||!queue.length){startCards();return}flipped=!flipped;showCard()};
+$("know").onclick=function(){if(!queue.length)return;words[queue[0]].ok++;queue.shift();flipped=false;save();showCard()};
+$("again").onclick=function(){if(!queue.length)return;words[queue[0]].miss++;queue.push(queue.shift());flipped=false;save();showCard()};
+
+/* quiz */
+var cur=-1,right=0,asked=0,answered=false,curDir="en";
+function nextQ(){
+$("fb").textContent="";$("fb").className="fb";$("qans").value="";answered=false;
+if(!words.length){$("qword").textContent="Добавьте слова на вкладке «Слова»";$("qscore").textContent="";cur=-1;return}
+var n;do{n=Math.floor(Math.random()*words.length)}while(words.length>1&&n===cur);cur=n;
+var d=$("dir").value;curDir=d==="mix"?(Math.random()<.5?"en":"ru"):d;
+$("qword").textContent=curDir==="en"?words[cur].en:words[cur].ru;
+$("qans").placeholder=curDir==="en"?"Введите перевод на русском":"Введите слово по-английски";$("qscore").textContent="Верно: "+right+" из "+asked;$("qspk").hidden=curDir!=="en";if(curDir==="en"&&autoOn())speak(words[cur].en);$("qans").focus()}
+function check(){
+if(cur<0||answered)return;var w=words[cur],a=norm($("qans").value);if(!a)return;
+var ans=curDir==="en"?w.ru:w.en;var opts=ans.split(/[,;]/).map(norm);answered=true;asked++;
+var fb=$("fb");
+if(opts.indexOf(a)>-1||norm(ans)===a){right++;w.ok++;fb.className="fb ok";fb.textContent="Верно!"}
+else{w.miss++;fb.className="fb bad";fb.textContent="Не совсем. Правильно: "+ans}
+$("qscore").textContent="Верно: "+right+" из "+asked;save();if(autoOn())speak(w.en)}
+$("dir").onchange=nextQ;$("check").onclick=check;$("next").onclick=nextQ;
+$("qans").addEventListener("keydown",function(e){if(e.key==="Enter"){answered?nextQ():check()}});
+
+/* speaking */
+var SR=window.SpeechRecognition||window.webkitSpeechRecognition,sc=-1,sRight=0,sAsked=0,listening=false;
+function clean(x){return x.toLowerCase().replace(/[^a-z0-9' ]/g,"").replace(/\s+/g," ").trim()}
+function sFb(t,c){$("sfb").textContent=t;$("sfb").className="fb"+(c?" "+c:"")}
+function nextS(){
+sFb("");$("shint").textContent="";
+if(!words.length){$("sword").textContent="Добавьте слова на вкладке «Слова»";$("sscore").textContent="";sc=-1;return}
+if(!SR){$("sword").textContent="Здесь не работает распознавание речи. Откройте сайт в Chrome.";$("sscore").textContent="";sc=-1;return}
+var n;do{n=Math.floor(Math.random()*words.length)}while(words.length>1&&n===sc);sc=n;
+$("sword").textContent=words[sc].ru;$("sscore").textContent="Верно: "+sRight+" из "+sAsked}
+$("hintb").onclick=function(){if(sc<0)return;$("shint").textContent=words[sc].en;speak(words[sc].en)};
+$("snext").onclick=nextS;
+$("mic").onclick=function(){
+if(sc<0||!SR||listening)return;
+var w=words[sc],rec=new SR(),got=false;
+rec.lang="en-US";rec.interimResults=false;rec.maxAlternatives=5;
+listening=true;$("mic").disabled=true;sFb("Слушаю… говорите");
+rec.onresult=function(e){
+got=true;var alts=[];for(var i=0;i<e.results[0].length;i++)alts.push(e.results[0][i].transcript);
+var t1=clean(w.en),t2=t1.replace(/^to /,"");
+var ok=alts.some(function(a){var c=clean(a);return c===t1||c===t2});
+sAsked++;
+if(ok){sRight++;w.ok++;sFb("Верно! Вы сказали: "+alts[0],"ok")}
+else{w.miss++;sFb("Вы сказали: «"+alts[0]+"». Нужно: "+w.en,"bad");speak(w.en)}
+$("sscore").textContent="Верно: "+sRight+" из "+sAsked;save()};
+rec.onerror=function(e){got=true;var m={"not-allowed":"Нет доступа к микрофону. Разрешите его в браузере.","service-not-allowed":"Нет доступа к микрофону. Разрешите его в браузере.","no-speech":"Ничего не услышал. Нажмите и попробуйте ещё раз.","network":"Для распознавания речи нужен интернет.","audio-capture":"Микрофон не найден."};sFb(m[e.error]||"Не получилось распознать. Попробуйте ещё раз.","bad")};
+rec.onend=function(){listening=false;$("mic").disabled=false;if(!got)sFb("Ничего не услышал. Нажмите и попробуйте ещё раз.","bad")};
+try{rec.start()}catch(e){listening=false;$("mic").disabled=false}};
+
+/* tabs */
+document.querySelectorAll("nav button").forEach(function(b){b.onclick=function(){
+document.querySelectorAll("nav button").forEach(function(x){x.setAttribute("aria-selected",x===b)});
+document.querySelectorAll(".panel").forEach(function(p){p.classList.toggle("on",p.id===b.dataset.t)});
+if(b.dataset.t==="cards")startCards();if(b.dataset.t==="quiz")nextQ();if(b.dataset.t==="speak")nextS();if(b.dataset.t==="list")renderList()}});
+
+load();renderList();
+$("cspk").onclick=function(){if(queue.length)speak(words[queue[0]].en)};
+$("qspk").onclick=function(){if(cur>=0)speak(words[cur].en)};
+try{$("auto").checked=localStorage.getItem("eng-auto")==="1"}catch(e){}
+$("auto").onchange=function(){try{localStorage.setItem("eng-auto",$("auto").checked?"1":"0")}catch(e){}};
+</script>
+</body>
+</html>
